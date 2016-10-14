@@ -24,6 +24,44 @@ db.knex.schema.hasTable('urls').then(function(exists) {
   }
 });
 
+
+//############################################################
+var MongoClient = require('mongodb').MongoClient; 
+var assert = require('assert');
+var mongoUrl = 'mongodb://localhost:27017/shortly-deploy';
+
+var createCollection = function(mongoDB, callback) {
+  // Get the documents collection
+  var collection = mongoDB.collection('users');
+  console.log('Successfully created users collection');
+  // Insert some documents
+  // collection.insertMany([
+  //   { a: 1}, { a: 2}, { a: 3}
+  // ], function(err, result) {
+  //   assert.equal(err, null);
+  //   console.log(result);
+  //   assert.equal(3, result.result.n);
+  //   assert.equal(3, result.ops.length);
+  //   console.log('Inserted 3 documents into the collection');
+  //   callback(result);
+  // });
+
+};
+
+
+MongoClient.connect(mongoUrl, function(err, mongoDB) {
+  assert.equal(null, err);
+  console.log('Connected successfully to mongo server');
+
+  createCollection(mongoDB, function() {
+    mongoDB.close();
+  });
+});
+
+
+
+
+
 db.knex.schema.hasTable('users').then(function(exists) {
   if (!exists) {
     db.knex.schema.createTable('users', function (user) {
