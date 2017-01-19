@@ -56,8 +56,7 @@ module.exports = function(grunt) {
       scripts: {
         files: [
           'public/client/**/*.js',
-          'public/lib/**/*.js',
-          'shortly-deploy/**/*'
+          'public/lib/**/*.js'
         ],
         tasks: [
           'concat',
