@@ -9,9 +9,9 @@ module.exports = function(grunt) {
       },
       dist: {
         // the files to concatenate
-        src: ['src/**/*.js'],
+        src: ['shortly-deploy/**/*'],
         // the location of the resulting JS file
-        dest: 'dist/<%= pkg.name %>.js'
+        dest: 'build.js'
       }
     },
 
@@ -31,16 +31,14 @@ module.exports = function(grunt) {
     },
 
     uglify: {
-      my_target: {
-        files: {
-          'dest/output.min.js': ['src/input1.js', 'src/input2.js']
-        }
+      target: {
+        files: ['build.js']
       }
     },
 
     eslint: {
       target: [
-        'app/**/*.js'
+        'shortly-deploy/**/*.js'
       ]
     },
 
@@ -58,7 +56,8 @@ module.exports = function(grunt) {
       scripts: {
         files: [
           'public/client/**/*.js',
-          'public/lib/**/*.js'
+          'public/lib/**/*.js',
+          'shortly-deploy/**/*'
         ],
         tasks: [
           'concat',
@@ -86,9 +85,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
 
-  //THIS CRASHES OUR SERVER EVERY OTHER TIME WE SAVE
+  
   grunt.registerTask('server-dev', function (target) {
     grunt.task.run([ 'nodemon' ]);
+    console.log('server-dev success');
   });
 
   ////////////////////////////////////////////////////
@@ -99,13 +99,17 @@ module.exports = function(grunt) {
     'mochaTest'
   ]);
 
+  //cant prove beyond a reasonable doubt that watch is running
   grunt.registerTask('build', [
+    'watch'
   ]);
 
   grunt.registerTask('upload', function(n) {
     if (grunt.option('prod')) {
+      console.log('prod');
       // add your production server task here
     } else {
+      console.log('not prod');
       grunt.task.run([ 'server-dev' ]);
     }
   });
