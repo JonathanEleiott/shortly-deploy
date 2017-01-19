@@ -11,7 +11,7 @@ module.exports = function(grunt) {
         // the files to concatenate
         src: ['shortly-deploy/**/*'],
         // the location of the resulting JS file
-        dest: 'build.js'
+        dest: 'public/dist/build.js'
       }
     },
 
@@ -32,7 +32,7 @@ module.exports = function(grunt) {
 
     uglify: {
       target: {
-        files: ['build.js']
+        files: ['public/dist/build.js']
       }
     },
 
