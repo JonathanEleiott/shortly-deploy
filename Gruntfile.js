@@ -86,6 +86,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
 
+  //THIS CRASHES OUR SERVER EVERY OTHER TIME WE SAVE
   grunt.registerTask('server-dev', function (target) {
     grunt.task.run([ 'nodemon' ]);
   });
