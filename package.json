@@ -11,7 +11,6 @@
   "scripts": {
     "start": "grunt build && grunt upload",
     "test": "grunt test",
-    "server": "grunt server-dev",
     "lint": "eslint ./"
   },
   "dependencies": {
