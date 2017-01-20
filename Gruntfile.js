@@ -5,11 +5,11 @@ module.exports = function(grunt) {
     concat: {
       options: {
         // define a string to put between each file in the concatenated output
-        separator: ';'
+        separator: '\n'
       },
       dist: {
         // the files to concatenate
-        src: ['shortly-deploy/**/*'],
+        src: 'public/client/*.js',
         // the location of the resulting JS file
         dest: 'public/dist/build.js'
       }
@@ -31,14 +31,19 @@ module.exports = function(grunt) {
     },
 
     uglify: {
-      target: {
-        files: ['public/dist/build.js']
+      my_target: {
+        files: {
+          'public/dist/build.min.js': 'public/dist/build.js'
+        }
       }
     },
+    
+    clean: ['public/dist'],
+
 
     eslint: {
       target: [
-        'shortly-deploy/**/*.js'
+        'public/client/*.js'
       ]
     },
 
@@ -48,7 +53,9 @@ module.exports = function(grunt) {
         roundingPrecision: -1
       },
       target: {
-        files: 'public/*.css'
+        files: {
+          'public/dist/output.min.css': ['public/*.css']
+        } 
       }
     },
 
@@ -83,6 +90,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
+  grunt.loadNpmTasks('grunt-contrib-clean');
 
   
   grunt.registerTask('server-dev', function (target) {
@@ -100,7 +108,7 @@ module.exports = function(grunt) {
 
   //cant prove beyond a reasonable doubt that watch is running
   grunt.registerTask('build', [
-    'watch'
+    'eslint', 'test', 'watch'
   ]);
 
   grunt.registerTask('upload', function(n) {
@@ -115,7 +123,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('deploy', [
     // add your deploy tasks here
+    'test', 'eslint', 'clean'
   ]);
-
 
 };

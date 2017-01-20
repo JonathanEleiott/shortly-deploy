@@ -9,7 +9,9 @@
     "node": ">=4.0.0"
   },
   "scripts": {
-    "start": "grunt upload && grunt build",
+    "start": "grunt upload",
+    "build": "grunt build",
+    "deploy": "grunt deploy",
     "test": "grunt test",
     "server": "grunt server-dev",
     "lint": "eslint ./"
@@ -27,6 +29,7 @@
     "express-partials": "^0.2.0",
     "express-session": "^1.13.0",
     "grunt": "^0.4.4",
+    "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-concat": "^1.0.0",
     "grunt-contrib-cssmin": "^1.0.1",
     "grunt-contrib-uglify": "^1.0.1",
