@@ -21,13 +21,13 @@ User.prototype.comparePassword = function(attemptedPassword, callback) {
   });
 };
 
-userSchema.pre('save', function() {
+userSchema.pre('save', function(next) {
   var cipher = Promise.promisify(bcrypt.hash);
   return cipher(this.password, null, null).bind(this)
     .then(function(hash) {
       this.password = hash;
-      next();
     });
+  next();
 });
 
 module.exports = User;
